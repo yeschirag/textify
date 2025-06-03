@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Universal Text Converter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/css/styles.css" />
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <div class="theme-switch" role="switch" id="themeToggle" tabindex="0" aria-pressed="false" aria-label="Toggle theme">
+    <span class="switch-icon" id="toggleIcon">🌙</span>
+    <div class="switch-track">
+      <div class="switch-thumb"></div>
+    </div>
+  </div> <!-- THIS WAS MISSING -->
+
+  <!-- Main Content -->
+  <main class="container" role="main">
+    <h1>Universal Text Converter</h1>
+    <p class="description">
+      Select any file type (images, documents, PDFs, text files, and more), and this tool will extract the text content for you.
+    </p>
+
+    <form id="uploadForm" onsubmit="return false;" aria-label="File upload form">
+      <label for="file-input" class="file-upload" id="fileUploadLabel" tabindex="0" aria-describedby="filename">
+        <div class="file-upload-icon">📁</div>
+        <div class="file-upload-text">Click or drag and drop any file here to convert to text</div>
+        <input type="file" id="file-input" aria-describedby="filename" accept=".png,.jpg,.jpeg,.gif,.bmp,.tiff,.pdf,.txt,.docx,.doc,.odt" />
+      </label>
+      <div id="filename" class="filename" aria-live="polite" aria-atomic="true"></div>
+      <img id="imagePreview" class="preview-image" alt="Image preview" hidden />
+      <button id="convertBtn" disabled>Convert to Text</button>
+    </form>
+
+    <section class="output-section" aria-live="polite" aria-atomic="true">
+      <div id="extractedText" class="extracted-text-container" aria-label="Extracted text output" tabindex="0"></div>
+      <a id="downloadLink" class="download-link" href="#" download="" hidden>Download Extracted Text</a>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Chirag Sharma
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"></script>
+  <script src="static/js/main.js"></script>
+</body>
+</html>

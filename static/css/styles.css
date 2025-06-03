@@ -1,0 +1,286 @@
+:root {
+  --bg: #121212;
+  --bg-alt: #1e1e1e;
+  --text: #e0e0e0;
+  --text-muted: #9e9e9e;
+  --primary: #ffffff;
+  --primary-light: #cccccc;
+  --shadow: rgba(255, 255, 255, 0.1);
+  --input-border: #2c2c2c;
+  --input-border-hover: #444;
+  --input-bg-hover: rgba(255, 255, 255, 0.05);
+  --font-family: 'Poppins', sans-serif;
+}
+
+[data-theme="light"] {
+  --bg: #f9f9f9;
+  --bg-alt: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #6b7280;
+  --primary: #1e1e1e;
+  --primary-light: #444;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --input-border: #cccccc;
+  --input-border-hover: #aaa;
+  --input-bg-hover: rgba(0, 0, 0, 0.03);
+  --font-family: 'Poppins', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers children horizontally */
+  transition: background 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+/* ✅ Updated Theme Toggle Switch */
+.theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 100;
+  user-select: none;
+  font-size: 1.2rem;
+}
+
+.switch-icon {
+  transition: transform 0.3s ease;
+}
+
+.switch-track {
+  background: var(--bg-alt);
+  border: 2px solid var(--primary);
+  width: 50px;
+  height: 26px;
+  border-radius: 20px;
+  position: relative;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+.switch-thumb {
+  background: var(--primary);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: left 0.3s ease;
+}
+
+[data-theme="light"] .switch-thumb {
+  left: 27px;
+}
+
+.container {
+  max-width: 720px;
+  width: 100%;
+  margin: 90px auto 0; /* top margin, auto left/right for centering */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Upload area */
+.file-upload {
+  border: 2px dashed var(--input-border);
+  border-radius: 10px;
+  padding: 2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+.file-upload:hover,
+.file-upload:focus,
+.file-upload.dragover {
+  border-color: var(--primary-light);
+  background: var(--input-bg-hover);
+}
+.file-upload-icon {
+  font-size: 2.8rem;
+}
+.file-upload-text {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.filename {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Image Preview */
+.preview-image {
+  max-width: 100%;
+  max-height: 250px;
+  margin: 1rem auto 0 auto;
+  border-radius: 8px;
+  object-fit: contain;
+  display: none;
+}
+button#convertBtn {
+  margin-top: 1.5rem;
+  background: var(--primary);
+  color: var(--bg);
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  position: static;
+  display: block;
+
+  /* Animation stuff */
+  transition: 
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  will-change: transform, box-shadow;
+}
+
+button#convertBtn:hover:not(:disabled) {
+  background-color: var(--primary-light);
+  color: var(--bg);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  transform: translateY(-3px) scale(1.05);
+}
+
+button#convertBtn:focus-visible {
+  outline: 3px solid var(--primary-light);
+  outline-offset: 3px;
+}
+
+button#convertBtn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Disabled state stays subtle */
+button#convertBtn:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Output Section */
+.output-section {
+  margin-top: 2rem;
+  width: 100%;
+  background: var(--bg-alt);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+#extractedText:empty::before {
+  content: "Here the text will come...";
+  color: var(--text-muted);
+  font-style: italic;
+  display: block;
+  padding: 0.5rem;
+}
+
+.extracted-text-container {
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1rem;
+  background: var(--bg-alt);
+  color: var(--text);
+  white-space: pre-wrap;
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  transition: min-height 0.3s ease;
+}
+
+/* Scrollbars */
+.extracted-text-container::-webkit-scrollbar {
+  width: 10px;
+}
+.extracted-text-container::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+.extracted-text-container::-webkit-scrollbar-thumb {
+  background-color: var(--text-muted);
+  border-radius: 10px;
+}
+.extracted-text-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text);
+}
+.extracted-text-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) var(--bg);
+}
+
+/* Download Link */
+.download-link {
+  display: block;
+  margin: 20px auto 0;
+  padding: 12px 20px;
+  background: var(--primary);
+  color: var(--bg);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px var(--shadow);
+  transition: background 0.3s ease;
+  max-width: 220px;
+}
+.download-link:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+  user-select: none;
+}
