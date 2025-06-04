@@ -1,0 +1,31 @@
+Example
+
+Assume the following values are stored at the indicated memory addresses and
+
+registers:
+
+Address Value Register Value
+0x100 OxFF yrax 0x100
+0x104 OxAB yrcx Oxt
+0x108 0x13 yrdx 0x3
+0x10C Ox11
+
+Fill in the following table showing the values for the indicated operands:
+
+Operand Value
+
+yrax
+
+0x104
+
+$0x108
+
+(hrax)
+
+4(%rax)
+9(%rax,%rdx)
+260 (%rcx, %rdx)
+OxFC(, “rex, 4)
+
+(hrax, hrdx ,4) ——s
+Bry 25
