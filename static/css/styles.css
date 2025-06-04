@@ -71,7 +71,7 @@ body {
 .switch-track {
   background: var(--bg-alt, #1e1e1e);
   border: 2px solid var(--primary, #fff);
-  width: 59px;
+  width: 60px;
   height: 32px;
   border-radius: 9999px;
   position: relative;
