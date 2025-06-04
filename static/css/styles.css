@@ -43,53 +43,66 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
   position: relative;
 }
-
 .theme-switch {
   position: fixed;
   top: 20px;
   right: 20px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
   z-index: 100;
   user-select: none;
-  font-size: 1.2rem;
 }
 
 .switch-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 26px;
-  width: 26px;
-  font-size: 1.2rem;
-  color: var(--primary); /* or adjust as per your theme */
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  border-radius: 50%;
+  transition: opacity 0.3s ease;
+  color: var(--primary, #fff);
 }
 
 .switch-track {
-  background: var(--bg-alt);
-  border: 2px solid var(--primary);
-  width: 50px;
-  height: 26px;
-  border-radius: 20px;
+  background: var(--bg-alt, #1e1e1e);
+  border: 2px solid var(--primary, #fff);
+  width: 59px;
+  height: 32px;
+  border-radius: 9999px;
   position: relative;
-  transition: background 0.3s ease, border 0.3s ease;
+  box-sizing: border-box;
 }
 
 .switch-thumb {
-  background: var(--primary);
+  background: var(--primary, #fff);
   border-radius: 50%;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   position: absolute;
-  top: 1px;
-  left: 1px;
+  top: 2px;
+  left: 2px;
   transition: left 0.3s ease;
 }
 
 [data-theme="light"] .switch-thumb {
-  left: 27px;
+  left: 30px;
+}
+
+[data-theme="light"] .sun {
+  opacity: 1;
+}
+[data-theme="light"] .moon {
+  opacity: 0.4;
+}
+[data-theme="dark"] .sun {
+  opacity: 0.4;
+}
+[data-theme="dark"] .moon {
+  opacity: 1;
 }
 
 .container {
