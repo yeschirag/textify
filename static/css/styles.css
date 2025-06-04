@@ -42,6 +42,7 @@ body {
   align-items: center;
   transition: background 0.3s ease, color 0.3s ease;
   position: relative;
+  padding-top : 0;
 }
 .theme-switch {
   position: fixed;
