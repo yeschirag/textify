@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory, url_for
 import os
 from werkzeug.utils import secure_filename
-from extractor import extract_text  # your extractor.py with multi-format support
+from extractor import extract_text
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ EXTRACTED_FOLDER = 'extracted_texts'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['EXTRACTED_FOLDER'] = EXTRACTED_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # Create folders if not exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)

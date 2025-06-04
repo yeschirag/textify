@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
-  const toggleCircle = document.querySelector(".switch-thumb");  // fixed selector
-  const toggleIcon = document.getElementById("toggleIcon");      // fixed ID
+  const toggleIcon = document.getElementById("toggleIcon");
 
   const fileUpload = document.getElementById("fileUploadLabel");
   const fileInput = document.getElementById("file-input");
@@ -13,14 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let selectedFile = null;
 
-  // Theme toggle setup
+  // Set theme and update toggle icon + aria-pressed (NO inline styling for thumb)
   function setTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
-    toggleCircle.style.left = theme === "light" ? "27px" : "1px"; // match your CSS thumb position
-    toggleIcon.textContent = theme === "light" ? "☀️" : "🌙";
+    toggleIcon.innerHTML = theme === "light"
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
     themeToggle.setAttribute("aria-pressed", theme === "light" ? "true" : "false");
   }
-
+  // Initialize theme from localStorage or default 'dark'
   let currentTheme = localStorage.getItem("theme") || "dark";
   setTheme(currentTheme);
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Prevent default drag/drop behavior on fileUpload container
+  // Prevent default on drag/drop events
   ["dragenter", "dragover", "dragleave", "drop"].forEach(evt => {
     fileUpload.addEventListener(evt, e => e.preventDefault());
   });
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fileUpload.classList.remove("dragover");
     if (e.dataTransfer.files.length > 0) {
       selectFile(e.dataTransfer.files[0]);
-      fileInput.value = ""; // reset input to allow re-selecting same file later
+      fileInput.value = "";
     }
   });
 
@@ -103,7 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Show loading animation by adding a class
     convertBtn.disabled = true;
+    convertBtn.classList.add("loading");
     extractedTextContainer.textContent = "Processing...";
     downloadLink.hidden = true;
     downloadLink.href = "#";
@@ -125,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
           errMsg = errData.error || errMsg;
         } catch { }
         extractedTextContainer.textContent = `Error: ${errMsg}`;
-        convertBtn.disabled = false;
         return;
       }
 
@@ -142,7 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       extractedTextContainer.textContent = `Error: ${error.message}`;
     } finally {
+      // Remove loading animation and enable button
       convertBtn.disabled = false;
+      convertBtn.classList.remove("loading");
     }
   });
 });

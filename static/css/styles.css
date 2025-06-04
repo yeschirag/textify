@@ -39,12 +39,11 @@ body {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* centers children horizontally */
+  align-items: center;
   transition: background 0.3s ease, color 0.3s ease;
   position: relative;
 }
 
-/* ✅ Updated Theme Toggle Switch */
 .theme-switch {
   position: fixed;
   top: 20px;
@@ -59,7 +58,13 @@ body {
 }
 
 .switch-icon {
-  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  width: 26px;
+  font-size: 1.2rem;
+  color: var(--primary); /* or adjust as per your theme */
 }
 
 .switch-track {
@@ -90,7 +95,7 @@ body {
 .container {
   max-width: 720px;
   width: 100%;
-  margin: 90px auto 0; /* top margin, auto left/right for centering */
+  margin: 90px auto 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -110,7 +115,6 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
-/* Upload area */
 .file-upload {
   border: 2px dashed var(--input-border);
   border-radius: 10px;
@@ -123,15 +127,18 @@ h1 {
   gap: 1rem;
   transition: all 0.3s ease;
 }
+
 .file-upload:hover,
 .file-upload:focus,
 .file-upload.dragover {
   border-color: var(--primary-light);
   background: var(--input-bg-hover);
 }
+
 .file-upload-icon {
   font-size: 2.8rem;
 }
+
 .file-upload-text {
   font-size: 1.05rem;
   font-weight: 500;
@@ -148,7 +155,6 @@ input[type="file"] {
   margin-top: 0.5rem;
 }
 
-/* Image Preview */
 .preview-image {
   max-width: 100%;
   max-height: 250px;
@@ -157,57 +163,93 @@ input[type="file"] {
   object-fit: contain;
   display: none;
 }
-button#convertBtn {
-  margin-top: 1.5rem;
-  background: var(--primary);
-  color: var(--bg);
-  font-weight: 600;
-  padding: 0.75rem 1.25rem;
+
+/* === Button Styles === */
+button#convertBtn,
+.download-link {
+  display: block;
+  margin: 2rem auto 0 auto;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
+  font-weight: 600;
+  color: var(--bg);
+  text-align: center;
+  text-decoration: none;
+  background: linear-gradient(270deg, var(--primary), var(--primary-light), var(--primary));
+  background-size: 600% 100%;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  max-width: 220px;
   width: 100%;
-  box-sizing: border-box;
-  position: static;
-  display: block;
-
-  /* Animation stuff */
-  transition: 
-    background-color 0.3s ease,
-    color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  will-change: transform, box-shadow;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  animation: animatedBackground 4s ease infinite;
 }
 
-button#convertBtn:hover:not(:disabled) {
-  background-color: var(--primary-light);
-  color: var(--bg);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-  transform: translateY(-3px) scale(1.05);
+@keyframes animatedBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-button#convertBtn:focus-visible {
-  outline: 3px solid var(--primary-light);
-  outline-offset: 3px;
+button#convertBtn:hover:not(:disabled),
+.download-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-button#convertBtn:active:not(:disabled) {
-  transform: translateY(0) scale(0.98);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+button#convertBtn:active:not(:disabled),
+.download-link:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Disabled state stays subtle */
 button#convertBtn:disabled {
   background: var(--text-muted);
+  color: var(--bg);
   cursor: not-allowed;
   box-shadow: none;
-  transform: none;
+  animation: none;
 }
 
-/* Output Section */
+button#convertBtn.loading {
+  cursor: wait;
+  /* Make the background stop animating while loading */
+  animation-play-state: paused;
+  filter: brightness(0.8);
+  position: relative;
+}
+
+/* Optional: spinner on the button while loading */
+button#convertBtn.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  border: 3px solid var(--bg);
+  border-top-color: var(--primary-light);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner keyframes */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === Output Section === */
 .output-section {
   margin-top: 2rem;
   width: 100%;
@@ -237,7 +279,7 @@ button#convertBtn:disabled {
   transition: min-height 0.3s ease;
 }
 
-/* Scrollbars */
+/* Scrollbar */
 .extracted-text-container::-webkit-scrollbar {
   width: 10px;
 }
@@ -256,7 +298,6 @@ button#convertBtn:disabled {
   scrollbar-color: var(--text-muted) var(--bg);
 }
 
-/* Download Link */
 .download-link {
   display: block;
   margin: 20px auto 0;
@@ -271,11 +312,10 @@ button#convertBtn:disabled {
   transition: background 0.3s ease;
   max-width: 220px;
 }
-.download-link:hover {
-  text-decoration: underline;
-}
 
-/* Footer */
+
+
+/* === Footer === */
 footer {
   margin-top: auto;
   text-align: center;
