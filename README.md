@@ -25,9 +25,9 @@ Texitfy is a sleek and simple web app for extracting text from images using Opti
 ### Screenshots
 
 <p float="left">
-  <img src="static/screenshots/light-mode.png" alt="Light mode" width="350" style="margin-right: 10px;" />
-  <img src="static/screenshots/dark-mode.png" alt="Dark mode" width="350" style="margin-right: 10px;" />
-  <img src="static/screenshots/image-preview-text.png" alt="Image preview and text extraction" width="350" />
+  <img src="static/screenshots/light-mode.png" alt="Light mode" width="320" style="margin-right: 10px;" />
+  <img src="static/screenshots/dark-mode.png" alt="Dark mode" width="320" style="margin-right: 10px;" />
+  <img src="static/screenshots/image-preview-text.png" alt="Image preview and text extraction" width="320" />
 </p>
 
 
