@@ -2,6 +2,12 @@
 
 Texitfy is a sleek and simple web app for extracting text from images using Optical Character Recognition (OCR). Powered by Python, Flask, and Tesseract OCR, it features a drag-and-drop UI, image preview, dark/light theme toggle, and download functionality.
 
+## 🔗 Live Demo
+
+Check out the live version of **Textify** here:  
+👉 [https://textify-nx1d.onrender.com/](https://textify-nx1d.onrender.com/)
+
+
 ---
 
 ## 🚀 Features
