@@ -42,7 +42,7 @@ Check out the live version of **Textify** here:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/texitfy.git
+git clone https://github.com/yeschirag/texitfy.git
 cd texitfy
 ```
 
